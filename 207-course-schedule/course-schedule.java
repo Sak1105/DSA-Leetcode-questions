@@ -4,7 +4,7 @@ class Solution {
         int count=0;
         int[] indegree=new int[n];
         for(int i=0;i<prerequisites.length;i++){
-            indegree[prerequisites[i][1]]++;
+            indegree[prerequisites[i][0]]++;
         }
         Queue<Integer> q=new LinkedList<>();
         for(int i=0;i<n;i++){
@@ -16,10 +16,10 @@ class Solution {
             int temp=q.poll();
             count++;
             for(int i=0;i<prerequisites.length;i++){
-                if(prerequisites[i][0]==temp){
-                    indegree[prerequisites[i][1]]--;
-                    if( indegree[prerequisites[i][1]]==0){
-                        q.add(prerequisites[i][1]);
+                if(prerequisites[i][1]==temp){
+                    indegree[prerequisites[i][0]]--;
+                    if( indegree[prerequisites[i][0]]==0){
+                        q.add(prerequisites[i][0]);
                     }
                 }
             }
