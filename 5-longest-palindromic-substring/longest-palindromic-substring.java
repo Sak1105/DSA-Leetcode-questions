@@ -1,41 +1,37 @@
 class Solution {
     public String longestPalindrome(String s) {
-        String longest="";
-        String str="";
-        
-        for(int i=0;i<s.length();i++)
-        {
-          str=findPali(s,i,i+1,longest);
-          if(str.length()>longest.length())
-          {
-            longest=str;
-    
-          }
-          str=findPali(s,i,i,longest);
-          if(str.length()>longest.length())
-          {
-            longest=str;
-    
-          }
-
+        int n=s.length();
+        int len=0;
+        String lps="";
+       for(int i=0;i<n;i++){
+        int low=i;
+        int high=i;
+        while(low>-1 && high<n && s.charAt(low)==s.charAt(high)){
+            low--;;
+            high++;
+             
         }
-        return longest;
-    }
-    
-
-private String findPali(String s, int left, int right,String longest)
-{
-    String str="", longestpali="";
- while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right)) 
- {
-     str=s.substring(left,right+1);
-           if(longestpali.length()<str.length()){
-            longestpali=  str;
-           }
-            left--;
-            right++;
- }  
- return longestpali;
+       
+        if(len<high-low+1){
+            len=high-low+1;
+            lps=s.substring(low+1,high);
+        }
+        low=i-1;
+        high=i;
+        
+        while((low>-1 && high<n)&& (s.charAt(low)==s.charAt(high))){
+             
+            low--;;
+            high++;
+           
+        }
+        
+        if(len<high-low+1){
+            len=high-low+1;
+             lps=s.substring(low+1,high);
+        }
+       }
+       return lps;
 }
 }
 
